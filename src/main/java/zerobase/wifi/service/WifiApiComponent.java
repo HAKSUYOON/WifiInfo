@@ -57,15 +57,14 @@ public class WifiApiComponent {
 	}
 	
     public static int getWipiInfoList() throws IOException {
-    	int startPage = 0;
-    	int endPage = 0;
+    	int startPage = 1;
+    	int endPage = 1;
     	int totalCount = totalCount();
     	int cnt = 0;
-    	StringBuilder sb = new StringBuilder();
     	
     	try {
     		
-    		for (int i=0; i < totalCount / 1000; i++) {
+    		for (int i=0; i <= totalCount / 1000; i++) {
     			startPage = 1 + (1000*i);
     			endPage = (i+1) * 1000;
     			

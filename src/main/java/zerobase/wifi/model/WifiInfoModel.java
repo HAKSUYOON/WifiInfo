@@ -1,4 +1,4 @@
-package zerobase.wifi.model;
+	package zerobase.wifi.model;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,11 +34,12 @@ public class WifiInfoModel {
 	        			+ " , WORK_DTTM )"
 	        			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); " ;
         	
+        	preparedStatement = connection.prepareStatement(sql);
+        	
         	for (int i = 0; i < jsonArray.size(); i++) {
         		
         		JsonObject db = (JsonObject)jsonArray.get(i).getAsJsonObject();
-        	
-        		preparedStatement = connection.prepareStatement(sql);
+        	        		
         		preparedStatement.setString(1, db.get("X_SWIFI_MGR_NO").getAsString());
         		preparedStatement.setString(2, db.get("X_SWIFI_WRDOFC").getAsString());
         		preparedStatement.setString(3, db.get("X_SWIFI_MAIN_NM").getAsString());

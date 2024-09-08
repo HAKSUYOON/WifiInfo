@@ -10,20 +10,14 @@
 <html>
 <head>
 	<title>위치 히스토리 목록</title>
-	<link href="res/css/main.css" rel="stylesheet" />
-	<script src="res/js/history.js"></script>	
+	<link href="res/css/main.css" rel="stylesheet" />	
 </head>
 <body>
 	<h1>위치 히스토리 목록</h1>
 	<%@include file="inc_menu.jsp"%>		
 	<%
 		PosHistoryModel posHistoryModel = new PosHistoryModel();
-		List<PosHistoryDto> historyList = posHistoryModel.selectHistory();
-		
-		String paramID = request.getParameter("id");
-		if (paramID != null) {
-			posHistoryModel.deleteHistory(paramID);
-		}
+		List<PosHistoryDto> historyList = posHistoryModel.selectHistory();		
 	%>
 	
 	<table class="table-list">
@@ -44,14 +38,14 @@
 						<td><%=posHistoryDto.getInsertLat()%></td>
 						<td><%=posHistoryDto.getInsertLnt()%></td>
 						<td><%=posHistoryDto.getViewDate()%></td>
-						<td><button onclick="deleteHistory(<%=posHistoryDto.getId()%>)">삭제</button></td>
+						<td class="td-center"><button>삭제</button></td>
 					</tr>
 				<%}%>
 			<%} else {%>
 					<tr>
 						<td class="td-center" colspan='5'>조회하신 이력이 없습니다.</td>
 					</tr>
-				<%}%>			
+			<%}%>			
 		</tbody>
 	</table>
 	

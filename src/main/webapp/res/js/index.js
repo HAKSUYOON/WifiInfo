@@ -24,12 +24,9 @@ http프로토콜에서는 geolocation을 지원하지 않는다. https프로토�
 
 let selectNearWifiInfoBtn = document.getElementById("selectNearWifiInfoBtn");
 
-let inputLat = null;
-let inputLnt = null;
-
 window.onload = function() {
-	lat = document.getElementById("inputLat").value;
-	lnt = document.getElementById("inputLnt").value;
+	inputLat = document.getElementById("inputLat").value;
+	inputLnt = document.getElementById("inputLnt").value;
 }
 
 selectNearWifiInfoBtn.addEventListener('click', function() {
@@ -37,7 +34,7 @@ selectNearWifiInfoBtn.addEventListener('click', function() {
 	let paramLnt = document.getElementById("inputLnt").value;
 	
 	if (paramLat != "" || paramLnt != "") {
-		window.location.assign("http://localhost:8088/templete/index.jst?lat=" + paramLat + "&lnt=" + paramLnt);
+		location.assign("http://localhost:8080/templete/index.jsp?lat=" + paramLat + "&lnt=" + paramLnt);
 	} else {
 		alert("위치 정보를 입력해주세요.")
 	}

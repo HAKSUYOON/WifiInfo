@@ -60,12 +60,12 @@ public class WifiInfoModel {
         		preparedStatement.addBatch();
         		preparedStatement.clearParameters();
         		
-        		if((i+1) % 1000 == 0) {
-        			int[] result = preparedStatement.executeBatch();
-        			count += result.length;
-        			connection.commit();
         		}
-        	}
+        	
+	        	int[] result = preparedStatement.executeBatch();
+				count += result.length;
+				connection.commit();
+				
         } catch (SQLException e) {
         	e.printStackTrace();
         	
@@ -92,11 +92,11 @@ public class WifiInfoModel {
         	
         	connection = MariadbConnection.getConnect();
         	
-        	String sql = " SELECT id, X_SWIFI_MGR_NO, X_SWIFI_WRDOFC, X_SWIFI_MAIN_NM, X_SWIFI_ADRES1 "
+        	String sql = " SELECT X_SWIFI_MGR_NO, X_SWIFI_WRDOFC, X_SWIFI_MAIN_NM, X_SWIFI_ADRES1 "
 	        			+ " , X_SWIFI_ADRES2, X_SWIFI_INSTL_FLOOR, X_SWIFI_INSTL_TY, X_SWIFI_INSTL_MBY, X_SWIFI_SVC_SE "
 	        			+ " , X_SWIFI_CMCWR, X_SWIFI_CNSTC_YEAR, X_SWIFI_INOUT_DOOR, X_SWIFI_REMARS3, LAT "
 	        			+ " , LNT, WORK_DTTM "
-	        			+ " , round(6371*acos(cos(radians(LAT))*cos(radians(?))*(cos(radians(?))*cos(radians(LNT))+sin(radians(?))*sin(radians(LNT))) +sin(rad(LAT))*sin(radians(?))), 4) as distance "
+	        			+ " , round(6371*acos(cos(radians(LAT))*cos(radians(?))*(cos(radians(?))*cos(radians(LNT))+sin(radians(?))*sin(radians(LNT))) +sin(radians(LAT))*sin(radians(?))), 4) as distance "
 	        			+ " FROM wifi_info "
 	        			+ " order by distance "
 	        			+ " limit 20; ";

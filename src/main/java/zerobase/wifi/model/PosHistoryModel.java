@@ -70,7 +70,7 @@ public class PosHistoryModel {
         	
         	while (rs.next()) {
         		PosHistoryDto posHistioryDto = new PosHistoryDto(
-        				rs.getInt("id"), rs.getString("insertLat"), rs.getString("insertLnt"), rs.getString("viewDate"));
+        				rs.getInt("id"), rs.getString("INSERT_LAT"), rs.getString("INSERT_LNT"), rs.getString("VIEW_DATE"));
         		list.add(posHistioryDto);
         	}
         	

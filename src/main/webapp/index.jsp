@@ -8,7 +8,14 @@
 <head>
 	<title>와이파이 정보 구하기</title>
 	<link href="res/css/main.css" rel="stylesheet" />
-	<script src="res/js/index.js"></script>
+	<script>
+		function getvalue(){
+			var lat = document.getElementById('inputLat').value;
+			var lnt = document.getElementById('inputLnt').value;
+			var urll = '?lat=' + lat +'&lnt=' + lnt;
+			return urll;
+		}
+	</script>
 </head>
 <body>
 	<%
@@ -17,12 +24,19 @@
 	%>
 	<h1>와이파이 정보 구하기</h1>
 	<%@include file="inc_menu.jsp"%>
-	<p>
-		LAT: <input type="text" id="inputLat" value=<%=inputLat%>> ,
-		LNT: <input type="text" id="inputLnt" value=<%=inputLnt%>>
-		<button>내 위치 가져오기</button>
-		<button id="selectNearWifiInfoBtn">근처 WIFI 정보 보기</button>
-	</p>
+	<div>
+		<form>
+		<span>LAT:</span>
+		<input type="text" id="inputLat" value=<%=inputLat%>>
+			
+		<span>LNT:</span>
+		<input type="text" id="inputLnt" value=<%=inputLnt%>>
+	
+		<input type="button" value="위치 가져오기"></input>
+		<input type="button" value="근처 WIFI 정보 보기" onclick="document.location.href=getvalue()"></input>
+		</form>
+	</div>
+	<br>
 
 	<table class="table-list">
 		<thead>
@@ -48,7 +62,7 @@
 		</thead>
 		<tbody>
 			<%
-				if(!("0,0").equals(inputLat) && !("0,0").equals(inputLnt)) {
+				if(!("0.0").equals(inputLat) && !("0.0").equals(inputLnt)) {
 					WifiInfoModel wifiInfoModel = new WifiInfoModel();
 					List<WifiInfoDto> list = wifiInfoModel.selectNearWifiInfo(inputLat, inputLnt);
 					
@@ -77,11 +91,11 @@
 						
 						<%}%>
 					<%}%>
-				<%} else { %>
+				<%} else {%>
 				<tr>
 					<td class="td-center" colspan='17' > 위치 정보를 입력한 후에 조회해 주세요. </td>
 				</tr>
-				<%} %>			
+				<%}%>			
 		</tbody>
 	</table>
 

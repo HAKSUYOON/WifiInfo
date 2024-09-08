@@ -23,4 +23,4 @@
 
 ##ERD파일
 
-https://github.com/HAKSUYOON/WifiInfo/blob/main/ERD%ED%8C%8C%EC%9D%BC.png
+![ERD파일](https://github.com/HAKSUYOON/WifiInfo/blob/main/ERD%ED%8C%8C%EC%9D%BC.png)

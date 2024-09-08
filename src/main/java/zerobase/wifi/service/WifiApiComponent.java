@@ -1,6 +1,8 @@
 package zerobase.wifi.service;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -19,7 +21,15 @@ public class WifiApiComponent {
 		int cnt = 0;
 		
 		try {
-			String url = "http://openapi.seoul.go.kr:8088/705369666c62617739306a524b4a56/json/TbPublicWifiInfo/1/1";
+			StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+			urlBuilder.append("/" +  URLEncoder.encode("705369666c62617739306a524b4a56","UTF-8") );
+			urlBuilder.append("/" +  URLEncoder.encode("json","UTF-8") );
+			urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo","UTF-8"));
+			urlBuilder.append("/" + URLEncoder.encode("1","UTF-8"));
+			urlBuilder.append("/" + URLEncoder.encode("1","UTF-8"));
+			
+			
+			URL url = new URL(urlBuilder.toString());
 			OkHttpClient okHttpClient = new OkHttpClient();
 			
 			Request.Builder builder = new Request.Builder().url(url).get();
@@ -59,11 +69,18 @@ public class WifiApiComponent {
     			startPage = 1 + (1000*i);
     			endPage = (i+1) * 1000;
     			
-    			String url = "http://openapi.seoul.go.kr:8088/705369666c62617739306a524b4a56/json/TbPublicWifiInfo/";
-    			sb.append(url).append(startPage).append("/").append(endPage);
+    			StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+    			urlBuilder.append("/" +  URLEncoder.encode("705369666c62617739306a524b4a56","UTF-8") );
+    			urlBuilder.append("/" +  URLEncoder.encode("json","UTF-8") );
+    			urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo","UTF-8"));
+    			urlBuilder.append("/" + URLEncoder.encode(Integer.toString(startPage),"UTF-8"));
+    			urlBuilder.append("/" + URLEncoder.encode(Integer.toString(endPage),"UTF-8"));
+    			
+    			
+    			URL url = new URL(urlBuilder.toString());
         		OkHttpClient okHttpClient = new OkHttpClient();
         		
-        		Request.Builder builder = new Request.Builder().url(sb.toString()).get();
+        		Request.Builder builder = new Request.Builder().url(url).get();
     			Request request = builder.build();
     			
     			Response response = okHttpClient.newCall(request).execute();
